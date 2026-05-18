@@ -20,6 +20,11 @@ Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
 
+// Health check for Railway deployment
+Route::get('/health', function () {
+    return response()->json(['status' => 'ok', 'timestamp' => now()]);
+});
+
 // Public API routes for projects
 Route::get('/projects', [ProjectController::class, 'index']);
 Route::get('/projects/homepage', [ProjectController::class, 'homepage']);
